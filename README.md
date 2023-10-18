@@ -16,7 +16,8 @@
 Ниже приведена схема взаимодействия микросервисов
 ![microservice-app-example](https://user-images.githubusercontent.com/1905821/34918427-a931d84e-f952-11e7-85a0-ace34a2e8edb.png)
 
-   # Варианты деплоя:
+# Варианты деплоя:
+
 1. Docker compose
 -    Заходим в папку с сервисом.
 -    Собираем через docker build -f Dockerfile . -t ИМЯ СЕРВИСА
@@ -32,6 +33,7 @@
 -    Проверяем, что все установилось верно, заходим на NodePort front 
 -    Проверяем что открывается front, логинимся admin/admin, и все кнопки нажимаются
 -    Проверяем с zipkin порт 9411
+
 3. Helm
 -    Запускаем инфру через docker compose up -d  (zipkin и redis)
 -    Заходим в папку helm в каждом сервисе, и делаем helm install ИМЯ-СЕРВИСА .
