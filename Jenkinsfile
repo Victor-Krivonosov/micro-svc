@@ -4,8 +4,10 @@ pipeline {
         stage('Build') {
             steps {
                 sh echo "Start build job"
-                sh docker build -f frontend/Dockerfile -t 192.168.2.2:5000/front ./frontend
-                sh docker push 192.168.2.2:5000/front
+                script {
+                  sh docker build -f frontend/Dockerfile -t 192.168.2.2:5000/front ./frontend
+                  sh docker push 192.168.2.2:5000/front
+                }
             }
         }
         stage('Test') {
