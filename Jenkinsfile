@@ -1,5 +1,11 @@
 pipeline {
     agent any
+stages {
+stage('Cloning our Git') {
+steps {
+git 'https://github.com/Victor-Krivonosov/micro-svc.git'
+}
+    agent any
     stages {
         stage('Build') {
             steps {
