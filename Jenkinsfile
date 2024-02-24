@@ -1,7 +1,10 @@
 pipeline {
     agent {
 //        label "agent"
-        docker { image 'docker'}
+        docker { 
+            image 'docker'
+            args '--entrypoint='
+        }
     }
     stages {
         stage('Build') {
