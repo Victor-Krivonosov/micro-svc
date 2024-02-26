@@ -16,7 +16,7 @@ pipeline {
                     sh 'hostname'
                     sh 'cat /etc/hosts'
                     sh 'ip a'
-                    sh 'ping registry'
+                    // sh 'ping registry'
                     sh 'docker build -f front/frontend/Dockerfile -t registry:5000/front ./front/frontend'
                     sh 'docker push registry:5000/front'
                 }
