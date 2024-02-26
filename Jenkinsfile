@@ -13,10 +13,6 @@ pipeline {
                 sh 'pwd'
                 sh 'ls -la'
                 script {
-                    sh 'hostname'
-                    sh 'cat /etc/hosts'
-                    sh 'ip a'
-                    // sh 'ping registry'
                     sh 'docker build -f front/frontend/Dockerfile -t 192.168.0.101:5000/front ./front/frontend'
                     sh 'docker push 192.168.0.101:5000/front'
                 }
