@@ -14,7 +14,7 @@ pipeline {
                 sh 'ls -la'
                 script {
                     sh 'docker build -f front/frontend/Dockerfile -t registry:5000/front ./front/frontend'
-                    sh 'docker push registry:5000/front/frontend'
+                    sh 'docker push registry:5000/front'
                     sh 'hostname'
                     sh 'cat /etc/hosts'
                     sh 'ip a'
