@@ -13,8 +13,8 @@ pipeline {
                 sh 'pwd'
                 sh 'ls -la'
                 script {
-                  sh 'docker build -f front/frontend/Dockerfile -t 192.168.201.12:5000/front ./front/frontend'
-                  sh 'docker push 192.168.201.12:5000/front'
+                  sh 'docker build -f front/frontend/Dockerfile -t registry:5000/front ./front/frontend'
+                  sh 'docker push registry:5000/front'
                 }
             }
         }
