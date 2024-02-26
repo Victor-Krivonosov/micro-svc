@@ -18,6 +18,7 @@ pipeline {
                     sh 'hostname'
                     sh 'cat /etc/hosts'
                     sh 'ip a'
+                    sh 'ping registry'
                 }
             }
         }
