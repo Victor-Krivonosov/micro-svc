@@ -13,7 +13,7 @@ pipeline {
                 sh 'pwd'
                 sh 'ls -la'
                 script {
-                    sh 'docker build -f auth-api/Dockerfile -t 192.168.0.101:5000/auth-api ./auth-api'
+                    sh 'docker build -f auth-api/auth-api/Dockerfile -t 192.168.0.101:5000/auth-api ./auth-api/auth-api'
                     sh 'docker push 192.168.0.101:5000/auth-api'
                 }
             }
