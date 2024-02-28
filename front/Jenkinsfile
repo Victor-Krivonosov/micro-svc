@@ -26,6 +26,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh "echo 'stage deploy'"
+                sh 'docker pull 192.168.0.101:5000/front'
+                sh 'pwd'
+                sh 'docker-compose up -d'
             }
         }
     }
