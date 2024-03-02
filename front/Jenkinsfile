@@ -33,7 +33,7 @@ pipeline {
             steps {
                 sh "echo 'stage deploy'"
                 sh 'pwd'
-                sh 'helm upgrade --install front -f front/helm/values.yaml'
+                sh 'helm upgrade --install front -f front/helm/values.yaml front/helm'
             }
         }
     }
