@@ -33,7 +33,7 @@ pipeline {
             // }
             environment { 
                 namespace = "${STAND}"
-                helm_release_name = "component.HELM_NAME"
+                helm_release_name = "${component.HELM_NAME}"
                 }
 
             steps {
