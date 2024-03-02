@@ -38,7 +38,7 @@ pipeline {
                 sh 'echo Start Deploy:  '+component.HELM_NAME
 
                 sh """
-                helm_release_name=component.HELM_NAME
+                export helm_release_name=component.HELM_NAME
                 #echo "\$helm_release_name"
                 #    helm upgrade --install $helm_release_name \
                 #    --wait \
