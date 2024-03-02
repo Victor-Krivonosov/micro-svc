@@ -22,7 +22,6 @@ pipeline {
                      
                     dynamicParameters << choice(name: 'STAND', choices: ['dev', 'test', 'ht', 'external'], description: "Choose STAND for deploy to OKD", defaultValue: "dev") 
                     properties([parameters(dynamicParameters)]) 
- 
                 } 
             } 
         }
@@ -35,7 +34,7 @@ pipeline {
             steps {
                 script { 
                 components.each { name, component -> 
-                if( params['DEPLOY_'+name] ) {
+                if( params['DEPLOY__'+name] ) {
                     sh 'echo HELM_NAME: '+component.HELM_NAME
                 }
                 // sh """
