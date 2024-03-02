@@ -1,9 +1,9 @@
 def components = [ 
-        'front'            : ["BUILD_JOB": "NDR_WO/build/erad_ms_monitoring", "HELM_NAME": "erad-ms-monitoring", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
-        'auth-api'         : ["BUILD_JOB": "NDR_WO/build/erad_ms_monitoring", "HELM_NAME": "erad-ms-monitoring", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
-        'log-message'      : ["BUILD_JOB": "NDR_WO/build/erad_ms_monitoring", "HELM_NAME": "erad-ms-monitoring", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
-        'todos-api'        : ["BUILD_JOB": "NDR_WO/build/erad_ms_monitoring", "HELM_NAME": "erad-ms-monitoring", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
-        'user-api'         : ["BUILD_JOB": "NDR_WO/build/erad_ms_monitoring", "HELM_NAME": "erad-ms-monitoring", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
+        'front'            : ["BUILD_JOB": "NDR_WO/build/erad_ms_monitoring", "HELM_NAME": "front", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
+        'auth-api'         : ["BUILD_JOB": "NDR_WO/build/erad_ms_monitoring", "HELM_NAME": "auth-api", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
+        'log-message'      : ["BUILD_JOB": "NDR_WO/build/erad_ms_monitoring", "HELM_NAME": "log-message", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
+        'todos-api'        : ["BUILD_JOB": "NDR_WO/build/erad_ms_monitoring", "HELM_NAME": "todos-api", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
+        'user-api'         : ["BUILD_JOB": "NDR_WO/build/erad_ms_monitoring", "HELM_NAME": "user-api", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
 ]
 
 pipeline {
@@ -15,16 +15,9 @@ pipeline {
             steps { 
                 script { 
                     dynamicParameters = [] 
- 
-                    components.eachWithIndex { name, component, index -> 
-                        dynamicParameters << gitParameter(branchFilter: 'origin' + "${index+1}" + '/(.*)', defaultValue: 'develop', quickFilterEnabled: true, name: 'BRANCH_' + name, type: 'PT_BRANCH_TAG', listSize: '10', useRepository: component.GIT, sortMode: 'ASCENDING') 
-                        dynamicParameters << booleanParam(name: 'DEPLOY_' + name, defaultValue: false) 
-                        dynamicParameters << booleanParam(name: 'DTRACK_' + name, defaultValue: false, description: "____________________________________________________________________________________________________________") 
-                    } 
-                     
-                    dynamicParameters << choice(name: 'STAND', choices: ['dev', 'test', 'ht', 'external'], description: "Choose STAND for deploy to OKD", defaultValue: "dev") 
+                    dynamicParameters << choice(name: 'SERVICE', choices: ['front', 'auth-api', 'log-message', 'todos-api', 'user-api'], description: "Choose SERVICE for deploy", defaultValue: ""), 
+                    dynamicParameters << choice(name: 'STAND', choices: ['micro'], description: "Choose STAND for deploy to OKD", defaultValue: ""), 
                     properties([parameters(dynamicParameters)]) 
- 
                 } 
             } 
         }
@@ -35,9 +28,27 @@ pipeline {
                 }
             }
             steps {
+                components.each { name, component -> 
+                sh "echo HELM_NAME  "+ component.HELM_NAME
+                }
                 sh "echo 'stage deploy'"
                 sh 'pwd'
-                sh 'helm upgrade --install front -f front/helm/values.yaml front/helm -n micro'
+                sh 'echo '
+            //     script {
+            //     sh """
+            //     helm upgrade --install $helm_release_name \
+            //     --wait \
+            //     --namespace $namespace \
+            //     --set image.tag=$docker_image_tag \
+            //     --set app.standName=$stand_name \
+            //     --set app.buildName=$env.BUILD_DISPLAY_NAME \
+            //     --set image.repository="$DOCKER_REGISTRY" \
+            //     --set image.folder="$IMAGE_FOLDER" \
+            //     $extended_set \
+            //     -f ./ci/helm/$helm_release_name/$helm_var_file \
+            //     ./ci/helm/$helm_release_name
+            //     """
+            // }
             }
         }
     }
