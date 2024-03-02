@@ -28,12 +28,14 @@ pipeline {
                 }
             }
             steps {
+                script { 
                 components.each { name, component -> 
                 sh "echo HELM_NAME  "+ component.HELM_NAME
                 }
                 sh "echo 'stage deploy'"
                 sh 'pwd'
                 sh 'echo '
+                }
             //     script {
             //     sh """
             //     helm upgrade --install $helm_release_name \
