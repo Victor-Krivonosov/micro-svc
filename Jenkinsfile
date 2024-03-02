@@ -29,7 +29,8 @@ pipeline {
             // }
             steps {
                 script { 
-                    sh "echo service1 "+ components.front
+                    components.each { m -> sh "echo $m.HELM_NAME"}
+                    // sh "echo service1 "+ components.front
                 // components.each { name, component -> 
                 // sh """
                 // helm upgrade --install $helm_release_name \
