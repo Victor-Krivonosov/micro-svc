@@ -32,6 +32,7 @@ pipeline {
             //     }
             // }
             environment { 
+                namespace = STAND
                 helm_release_name = "component.HELM_NAME"
                 }
 
@@ -43,12 +44,12 @@ pipeline {
                 sh 'echo \$helm_release_name'
                 sh """
                 
-                #echo "\$helm_release_name"
-                #    helm upgrade --install $helm_release_name \
-                #    --wait \
-                #    --namespace $namespace \
-                #    -f ./ci/helm/$helm_release_name/$helm_var_file \
-                #    ./ci/helm/$helm_release_name
+                echo "\$helm_release_name"
+                    helm upgrade --install $helm_release_name \
+                    --wait \
+                    --namespace $namespace \
+                    -f ./$helm_release_name/helm/values.yaml \
+                    ./$helm_release_name/helm
                 """
                 }
                 }
