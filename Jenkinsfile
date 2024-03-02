@@ -39,7 +39,7 @@ pipeline {
                 script { 
                 components.each { name, component -> 
                 if( params['DEPLOY__'+name] ) {
-                helm_release_name = component.HELM_NAME
+                // helm_release_name = component.HELM_NAME
                 sh 'echo Start Deploy:  '+component.HELM_NAME
                 sh 'echo \$helm_release_name'
                 // sh """
