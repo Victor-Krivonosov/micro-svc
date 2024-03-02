@@ -32,7 +32,7 @@ pipeline {
                 }
             }
             environment { 
-                namespace = "${STAND}"
+                //namespace = "${STAND}"
                 }
 
             steps {
