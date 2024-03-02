@@ -35,21 +35,16 @@ pipeline {
                 script { 
                 components.each { name, component -> 
                 if( params['DEPLOY__'+name] ) {
-                    sh 'echo HELM_NAME: '+component.HELM_NAME
-                }
-                // sh """
-                // helm upgrade --install $helm_release_name \
-                // --wait \
-                // --namespace $namespace \
-                // --set image.tag=$docker_image_tag \
-                // --set app.standName=$stand_name \
-                // --set app.buildName=$env.BUILD_DISPLAY_NAME \
-                // --set image.repository="$DOCKER_REGISTRY" \
-                // --set image.folder="$IMAGE_FOLDER" \
-                // $extended_set \
-                // -f ./ci/helm/$helm_release_name/$helm_var_file \
-                // ./ci/helm/$helm_release_name
-                // """
+                sh 'echo Start Deploy:  '+component.HELM_NAME
+                sh """
+                export helm_release_name=component.HELM_NAME
+                echo $helm_release_name
+                #    helm upgrade --install $helm_release_name \
+                #    --wait \
+                #    --namespace $namespace \
+                #    -f ./ci/helm/$helm_release_name/$helm_var_file \
+                #    ./ci/helm/$helm_release_name
+                """
                 }
                 }
             }
