@@ -22,11 +22,11 @@ pipeline {
             } 
         }
         stage('Deploy') {
-             agent {
-                docker {
-                    image '192.168.0.101:5000/myhelm'
-                }
-            }
+            //  agent {
+            //     docker {
+            //         image '192.168.0.101:5000/myhelm'
+            //     }
+            // }
             steps {
                 script { 
                 components.each { name, component -> 
