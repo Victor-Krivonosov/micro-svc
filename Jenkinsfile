@@ -20,17 +20,17 @@ pipeline {
                     dynamicParameters << booleanParam(name: 'DEPLOY__' + name, defaultValue: false, description: "____________________________________________________________________________________________________________") 
                     } 
                      
-                    dynamicParameters << choice(name: 'STAND', choices: ['dev', 'test', 'ht', 'external'], description: "Choose STAND for deploy to OKD", defaultValue: "dev") 
+                    dynamicParameters << choice(name: 'STAND', choices: ['micro'], description: "Choose STAND for deploy to OKD", defaultValue: "micro") 
                     properties([parameters(dynamicParameters)]) 
                 } 
             } 
         }
         stage('Deploy') {
-            //  agent {
-            //     docker {
-            //         image '192.168.0.101:5000/myhelm'
-            //     }
-            // }
+             agent {
+                docker {
+                    image '192.168.0.101:5000/myhelm'
+                }
+            }
             environment { 
                 namespace = "${STAND}"
                 }
