@@ -17,7 +17,7 @@ pipeline {
                     dynamicParameters = [] 
  
                     components.eachWithIndex { name, component, index -> 
-                    dynamicParameters << booleanParam(name: 'DEPLOY' + name, defaultValue: false, description: "____________________________________________________________________________________________________________") 
+                    dynamicParameters << booleanParam(name: 'DEPLOY__' + name, defaultValue: false, description: "____________________________________________________________________________________________________________") 
                     } 
                      
                     dynamicParameters << choice(name: 'STAND', choices: ['dev', 'test', 'ht', 'external'], description: "Choose STAND for deploy to OKD", defaultValue: "dev") 
