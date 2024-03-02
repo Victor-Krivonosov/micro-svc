@@ -36,7 +36,8 @@ pipeline {
                 components.each { name, component -> 
                 if( params['DEPLOY__'+name] ) {
                 sh 'echo Start Deploy:  '+component.HELM_NAME
-                sh 'export helm_release_name='component.HELM_NAME
+                sh 'export helm_release_name='+component.HELM_NAME
+                sh 'echo $helm_release_name'
                 sh """
                 
                 #echo "\$helm_release_name"
