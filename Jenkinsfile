@@ -15,9 +15,14 @@ pipeline {
             steps { 
                 script { 
                     dynamicParameters = [] 
-                    dynamicParameters << booleanParam(name: 'DEPLOY_' + name, defaultValue: false, description: "Choose SERVICE for deploy")
-                    dynamicParameters << choice(name: 'STAND', choices: ['micro'], description: "Choose STAND for deploy", defaultValue: "")
+ 
+                    components.eachWithIndex { name, component, index -> 
+                    dynamicParameters << booleanParam(name: 'DEPLOY' + name, defaultValue: false, description: "____________________________________________________________________________________________________________") 
+                    } 
+                     
+                    dynamicParameters << choice(name: 'STAND', choices: ['dev', 'test', 'ht', 'external'], description: "Choose STAND for deploy to OKD", defaultValue: "dev") 
                     properties([parameters(dynamicParameters)]) 
+ 
                 } 
             } 
         }
@@ -29,34 +34,23 @@ pipeline {
             // }
             steps {
                 script { 
-                    sh "echo service1 "+ components.front
                 components.each { name, component -> 
-                sh """
-                helm upgrade --install $helm_release_name \
-                --wait \
-                --namespace $namespace \
-                --set image.tag=$docker_image_tag \
-                --set app.standName=$stand_name \
-                --set app.buildName=$env.BUILD_DISPLAY_NAME \
-                --set image.repository="$DOCKER_REGISTRY" \
-                --set image.folder="$IMAGE_FOLDER" \
-                $extended_set \
-                -f ./ci/helm/$helm_release_name/$helm_var_file \
-                ./ci/helm/$helm_release_name
-                """
-                script { 
-                    stagesToExecute = [:] 
-                    components.each { name, component -> 
-                        COMPONENT_BRANCH = params."BRANCH_$name".replace("/", "-") 
-                        HELM_EXTENDED_SET = "--set app.branch=$COMPONENT_BRANCH" 
-                        if( params['DEPLOY_'+name] ) { 
-                            stagesToExecute[component.HELM_NAME] = common.buildAndDeployHelm(name,component.BUILD_JOB,component.HELM_NAME,"somb-${params.STAND}","${params.STAND}",HELM_VARS_FILE,HELM_EXTENDED_SET) 
-                        } 
-                    } 
-                    if (!stagesToExecute.keySet().isEmpty()) { 
-                        parallel(stagesToExecute) 
-                    } 
+                if( params['DEPLOY_'+name] ) {
+                    sh 'echo HELM_NAME: '+component.HELM_NAME
                 }
+                // sh """
+                // helm upgrade --install $helm_release_name \
+                // --wait \
+                // --namespace $namespace \
+                // --set image.tag=$docker_image_tag \
+                // --set app.standName=$stand_name \
+                // --set app.buildName=$env.BUILD_DISPLAY_NAME \
+                // --set image.repository="$DOCKER_REGISTRY" \
+                // --set image.folder="$IMAGE_FOLDER" \
+                // $extended_set \
+                // -f ./ci/helm/$helm_release_name/$helm_var_file \
+                // ./ci/helm/$helm_release_name
+                // """
                 }
                 }
             }
