@@ -25,11 +25,15 @@ pipeline {
             }
         }
         stage('Deploy') {
+             agent {
+                docker {
+                    image '192.168.0.101:5000/myhelm'
+                }
+            }
             steps {
                 sh "echo 'stage deploy'"
-                sh 'docker pull 192.168.0.101:5000/front'
                 sh 'pwd'
-                //sh 'docker-compose up -d'
+                sh 'helm install'
             }
         }
     }
