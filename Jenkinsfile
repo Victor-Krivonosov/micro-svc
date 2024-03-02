@@ -15,7 +15,7 @@ pipeline {
             steps { 
                 script { 
                     dynamicParameters = [] 
-                    dynamicParameters << choice(name: 'SERVICE', choices: ['front', 'auth-api', 'log-message', 'todos-api', 'user-api'], description: "Choose SERVICE for deploy", defaultValue: ""), 
+                    dynamicParameters << choice(name: 'SERVICE', choices: ['front', 'auth-api', 'log-message', 'todos-api', 'user-api'], description: "Choose SERVICE for deploy", defaultValue: "") 
                     dynamicParameters << choice(name: 'STAND', choices: ['micro'], description: "Choose STAND for deploy to OKD", defaultValue: "")
                     properties([parameters(dynamicParameters)]) 
                 } 
