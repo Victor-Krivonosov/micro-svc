@@ -29,7 +29,7 @@ pipeline {
             // }
             steps {
                 script { 
-                    components.each { m -> sh "echo $m.key"}
+                    components.each { m -> sh "echo $m.key[0]"}
                     // sh "echo service1 "+ components.front
                 // components.each { name, component -> 
                 // sh """
