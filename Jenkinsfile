@@ -36,9 +36,10 @@ pipeline {
                 components.each { name, component -> 
                 if( params['DEPLOY__'+name] ) {
                 sh 'echo Start Deploy:  '+component.HELM_NAME
+
                 sh """
-                export helm_release_name=component.HELM_NAME
-                echo "\$helm_release_name"
+                helm_release_name=component.HELM_NAME
+                #echo "\$helm_release_name"
                 #    helm upgrade --install $helm_release_name \
                 #    --wait \
                 #    --namespace $namespace \
