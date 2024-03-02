@@ -29,7 +29,9 @@ pipeline {
             // }
             steps {
                 script { 
-                    components.each { m -> sh "echo $m.key[0]"}
+                    components.${params.SERVICE}.each { service -> 
+                    sh "echo HELM_NAME: "+service.HELM_NAME 
+}
                     // sh "echo service1 "+ components.front
                 // components.each { name, component -> 
                 // sh """
