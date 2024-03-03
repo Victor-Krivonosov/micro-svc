@@ -46,18 +46,18 @@ spec:
           requests:                 #минимальное количество ресурсов необходимых для создания пода
             cpu: {{ .Values.requests.cpu }}
             memory: {{ .Values.requests.memory }}
-        livenessProbe:              # проверяет, что наш под жив, регулярно тыкая в порт
-          tcpSocket:
-            port: {{ .Values.service.internalPort }}
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          failureThreshold: 15
-        readinessProbe:             # проверяет, что под готов к работе
-          tcpSocket:
-            port: {{ .Values.service.internalPort }}
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          failureThreshold: 15
+        # livenessProbe:              # проверяет, что наш под жив, регулярно тыкая в порт
+        #   tcpSocket:
+        #     port: {{ .Values.service.internalPort }}
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 10
+        #   failureThreshold: 15
+        # readinessProbe:             # проверяет, что под готов к работе
+        #   tcpSocket:
+        #     port: {{ .Values.service.internalPort }}
+        #   initialDelaySeconds: 30
+        #   periodSeconds: 10
+        #   failureThreshold: 15
         securityContext:            # настройки безопасности пода
           allowPrivilegeEscalation: true  # разрешает повышать права в поде
           capabilities:             # указываем, что поду не нужны никакие CAPS (повышение прав по секьюрити)
