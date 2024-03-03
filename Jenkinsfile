@@ -27,9 +27,9 @@ pipeline {
         }
         stage('Deploy') {
              agent {
-                // docker {
+                 docker {
                     image '192.168.0.101:5000/myhelm2'
-                // }
+                }
             }
             // environment { 
             //     namespace = "${STAND}"
