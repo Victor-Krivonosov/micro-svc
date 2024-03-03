@@ -20,17 +20,5 @@ pipeline {
                 sh "echo 'stage test'"
             }
         }
-        stage('Deploy') {
-             agent {
-                docker {
-                    image '192.168.0.101:5000/myhelm'
-                }
-            }
-            steps {
-                sh "echo 'stage deploy'"
-                sh 'pwd'
-                sh 'helm upgrade --install front -f front/helm/values.yaml front/helm -n micro'
-            }
-        }
     }
 }
