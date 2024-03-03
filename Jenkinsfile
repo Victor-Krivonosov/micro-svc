@@ -28,7 +28,7 @@ pipeline {
         stage('Deploy') {
              agent {
                 docker {
-                    image '192.168.0.101:5000/myhelm'
+                    image '192.168.0.101:5000/myhelm2'
                 }
             }
             // environment { 
