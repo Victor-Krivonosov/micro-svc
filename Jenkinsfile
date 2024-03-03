@@ -32,9 +32,9 @@ pipeline {
                 //     image '192.168.0.101:5000/myhelm2'
                 // }
             }
-            // environment { 
-            //     namespace = "${STAND}"
-            //     }
+            environment { 
+                namespace = "${STAND}"
+                }
 
             steps {
                 script { 
@@ -44,8 +44,8 @@ pipeline {
                 helm_release_name = component.HELM_NAME
                 sh 'echo Start Deploy:  '+component.HELM_NAME
                 sh 'echo \$helm_release_name'
+
                 // sh """
-                
                 // echo "\$helm_release_name"
                 //     helm upgrade --install $helm_release_name \
                 //     --wait \
