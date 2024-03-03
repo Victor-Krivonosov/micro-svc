@@ -3,7 +3,7 @@ def components = [
         'auth-api'         : ["BUILD_JOB": "deploy", "HELM_NAME": "auth-api", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
         'log-message'      : ["BUILD_JOB": "deploy", "HELM_NAME": "log-message-processor", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
         'todos-api'        : ["BUILD_JOB": "deploy", "HELM_NAME": "todos-api", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
-        'user-api'         : ["BUILD_JOB": "deploy", "HELM_NAME": "user-api", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
+        'user-api'         : ["BUILD_JOB": "deploy", "HELM_NAME": "users-api", "GIT": "https://github.com/Victor-Krivonosov/micro-svc.git"],
 ]
 
 pipeline {
