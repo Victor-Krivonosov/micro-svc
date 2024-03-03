@@ -45,14 +45,14 @@ pipeline {
                 sh 'echo Start Deploy:  '+component.HELM_NAME
                 sh 'echo \$helm_release_name'
 
-                // sh """
-                // echo "\$helm_release_name"
-                //     helm upgrade --install $helm_release_name \
-                //     --wait \
-                //     --namespace $namespace \
-                //     -f ./$helm_release_name/helm/values.yaml \
-                //     ./$helm_release_name/helm
-                // """
+                sh """
+                echo "\$helm_release_name"
+                    helm upgrade --install $helm_release_name \
+                    --wait \
+                    --namespace $namespace \
+                    -f ./$helm_release_name/helm/values.yaml \
+                    ./$helm_release_name/helm
+                """
                 }
                 }
             }
