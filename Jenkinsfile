@@ -20,7 +20,7 @@ pipeline {
                     dynamicParameters << booleanParam(name: 'DEPLOY__' + name, defaultValue: false, description: "____________________________________________________________________________________________________________") 
                     } 
                      
-                    dynamicParameters << choice(name: 'STAND', choices: ['micro'], description: "Choose STAND for deploy to OKD", defaultValue: "micro") 
+                    dynamicParameters << choice(name: 'STAND', choices: ['micro'], description: "Choose STAND for deploy", defaultValue: "micro") 
                     properties([parameters(dynamicParameters)]) 
                 } 
             } 
@@ -31,17 +31,18 @@ pipeline {
                     image '192.168.0.101:5000/myhelm'
                 }
             }
-            environment { 
-                namespace = "${STAND}"
-                }
+            // environment { 
+            //     namespace = "${STAND}"
+            //     }
 
             steps {
                 script { 
-                components.each { name, component -> 
-                if( params['DEPLOY__'+name] ) {
+                sh 'echo Start Deploy: '
+                // components.each { name, component -> 
+                // if( params['DEPLOY__'+name] ) {
                 // helm_release_name = component.HELM_NAME
-                sh 'echo Start Deploy:  '+component.HELM_NAME
-                sh 'echo \$helm_release_name'
+                // sh 'echo Start Deploy:  '+component.HELM_NAME
+                // sh 'echo \$helm_release_name'
                 // sh """
                 
                 // echo "\$helm_release_name"
@@ -56,5 +57,5 @@ pipeline {
             }
         }
     }
-}
-}
+// }
+// }
