@@ -52,8 +52,8 @@ pipeline {
                     -f ./$helm_release_name/helm/values.yaml \
                     ./$helm_release_name/helm
                 """
-                sh 'pwd'
-                //sh 'docker compose up -d'
+                sh 'cd front'
+                sh 'docker compose up -d'
                 }
                 }
             }
