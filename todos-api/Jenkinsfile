@@ -23,10 +23,5 @@ pipeline {
                 sh "echo 'stage test'"
             }
         }
-        stage('Deploy') {
-            steps {
-                sh "echo 'stage deploy'"
-            }
-        }
     }
 }
