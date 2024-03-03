@@ -28,7 +28,7 @@ pipeline {
         stage('Deploy') {
              agent {
                 docker {
-                    args "-v /home/tst/jenkins/jenkins_configuration:/var/jenkins_home"
+                    args "-v /var/run/docker.sock:/var/run/docker.sock"
                     image '192.168.0.101:5000/myhelm2'
                 }
             }
