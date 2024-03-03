@@ -1,5 +1,5 @@
 app:                               ### блок про деплой ### 
-  name: log-message                  # название приложения
+  name: log-message-processor              # название приложения
   standName:                       # полезная переменная для выкатки на разные стенды
   secretName: hello-secret         # имя файла с секретами
   branch: develop                  # полезная переменная для передачи в аннтоцию имени ветки
